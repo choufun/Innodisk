@@ -1,0 +1,17 @@
+*
+Doc#
+Status
+Submit Date
+FA Date
+Customer Name
+FAE
+Product BU
+Innodisk PN
+ERP-Familes
+ERP-Flash
+ERP-Product Line
+Forward FA TAT
+Local FA TAT
+Root cause L1
+Root cause L2
+ERP-BU

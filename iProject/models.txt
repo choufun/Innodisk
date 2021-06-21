@@ -1,0 +1,49 @@
+S25 : 2.5" SSD
+S18 : 1.8" SSD
+SDC : SD Card
+2M- : uSD Card
+SDM : uSD Card
+CFA : CFast
+CFC : CF
+1M- : CF
+SLM : SATA Slim
+SSL : SATADOM
+SSC : SATADOM
+SSH : SATADOM
+SSV : SATADOM
+SSF : SATADOM
+SML : SATADOM
+SMH : SATADOM
+SMV : SATADOM
+SIL : SATADOM
+SNL : ServerDOM
+SNH : ServerDOM
+SNV : ServerDOM
+NSD : nanoSSD
+MSR : mSATA
+MSM : mSATA mini
+M24 : M.2
+M28 : M.2
+P25 : 2.5" PATA
+EDM : mini PCIeDOM
+UH1 : USB EDC
+UA1 : USB Drive
+DEU : USB EDC
+UF  : USB EDC
+4H- : EDC
+MPV : mPCIe to VGA
+PV- : mPCIe to VGA
+PL- : PCIe to GbE LAN
+UC- : USB to dual CANbus 2.0B
+ST2 : 2.5" 10000
+SI  : SATADOM
+1M : iCF
+2M : uSD Card
+UH2 : USB EDC
+DGM : mSATA
+4H  : EDC4000
+DC  : FiD 2.5 ATA
+S8  : SATADOM
+PS  : mSATA
+SN  : 1.8" SSD
+CFX : CFexpress

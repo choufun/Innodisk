@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a09fed03-3366-4bc0-add7-20940ade88b2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Inquiry Issues_20210617091855.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eFAE_CFQR Issues_20210617152029.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Steven_Chou.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Steven_Chou.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clerk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clerk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FAE Report.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/FAE Report.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/case.py" beforeDir="false" afterPath="$PROJECT_DIR$/case.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFAE_Report_20200617170916.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/writer.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cz0zqpplJ9m7kKgTW79SF6sOIC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Steven Chou\Documents\GitHub\iReport" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Steven Chou\Documents\GitHub\iReport" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="iReport" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a09fed03-3366-4bc0-add7-20940ade88b2" name="Default Changelist" comment="" />
+      <created>1591516379637</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591516379637</updated>
+      <workItem from="1591516381032" duration="1087000" />
+      <workItem from="1591746742396" duration="38196000" />
+      <workItem from="1591986367275" duration="12356000" />
+      <workItem from="1592176289805" duration="15000" />
+      <workItem from="1592249560698" duration="30000000" />
+      <workItem from="1592543265854" duration="42000" />
+      <workItem from="1592549823339" duration="61706000" />
+      <workItem from="1595176341547" duration="61000" />
+      <workItem from="1595181241527" duration="86000" />
+      <workItem from="1595192723307" duration="817000" />
+      <workItem from="1595197266867" duration="788000" />
+      <workItem from="1595204425389" duration="688000" />
+      <workItem from="1596069545645" duration="20038000" />
+      <workItem from="1596513513202" duration="3002000" />
+      <workItem from="1599022162169" duration="732000" />
+      <workItem from="1599979731297" duration="1293000" />
+      <workItem from="1600642336016" duration="57000" />
+      <workItem from="1601528683803" duration="3078000" />
+      <workItem from="1601848146322" duration="13000" />
+      <workItem from="1603947939614" duration="3826000" />
+      <workItem from="1604880154662" duration="598000" />
+      <workItem from="1606114599917" duration="2437000" />
+      <workItem from="1607511548126" duration="3732000" />
+      <workItem from="1608261124133" duration="15016000" />
+      <workItem from="1608878339629" duration="2517000" />
+      <workItem from="1609719180465" duration="32000" />
+      <workItem from="1611639582084" duration="1573000" />
+      <workItem from="1613952602852" duration="3472000" />
+      <workItem from="1616486455490" duration="930000" />
+      <workItem from="1617167865497" duration="213000" />
+      <workItem from="1619687056241" duration="291000" />
+      <workItem from="1619762896315" duration="169000" />
+      <workItem from="1623915022542" duration="1927000" />
+      <workItem from="1624311448268" duration="688000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/iReport$main.coverage" NAME="main Coverage Results" MODIFIED="1623917174252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
