@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a09fed03-3366-4bc0-add7-20940ade88b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Inquiry Issues_20210617091855.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eFAE_CFQR Issues_20210617152029.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/old.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Steven_Chou.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Steven_Chou.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clerk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clerk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FAE Report.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/FAE Report.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case.py" beforeDir="false" afterPath="$PROJECT_DIR$/case.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFAE_Report_20200617170916.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/writer.py" afterDir="false" />
-    </list>
+    <list default="true" id="a09fed03-3366-4bc0-add7-20940ade88b2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +16,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1cz0zqpplJ9m7kKgTW79SF6sOIC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -144,6 +130,7 @@
       <workItem from="1619762896315" duration="169000" />
       <workItem from="1623915022542" duration="1927000" />
       <workItem from="1624311448268" duration="688000" />
+      <workItem from="1624313920025" duration="42000" />
     </task>
     <servers />
   </component>
