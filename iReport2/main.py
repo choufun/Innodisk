@@ -5,6 +5,7 @@ import os
 
 from reader import *
 
+
 class App:
     def __init__(self, master):
         self.master = master
@@ -20,7 +21,7 @@ class App:
         self.filename.set(filename)
 
     def compile(self):
-        reader = Reader(self.filename.get())
+        reader = Reader(self.filename.get()).scan()
         pass
 
 
