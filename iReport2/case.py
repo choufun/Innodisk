@@ -9,7 +9,7 @@ series = {
     'D82' : {'MLC': '3MG2-P', 'iSLC': '3IE2-P', 'SLC': '3SE2-P'},
     'D70' : {'MLC': '3MG3-P', 'iSLC': '3IE3-P', 'SLC': '3SE3-P'},
     'D72' : {'MLC': '3ME2'},
-    'DK1' : {'3D TLC': '3TE7'},
+    'DK1' : {'3D TLC': '3TE7', 'iSLC (3D TLC)': '3IE7'},
     'J30' : {'MLC': 'D150QV', 'SLC': 'D150SV-L'},
     'I81' : {'SLC': 'SD'},
     'I68' : {'SLC': '3SE2'},
@@ -33,30 +33,10 @@ series = {
     'D41' : {'SLC': '1SE'},
     'J20' : {'MLC': '25000 SATA', 'SLC': '10000 Plus SATA'},
     'I21' : {'SLC': '3SE'},
-    'D21' : {'SLC': '2000+'}
+    'D21' : {'SLC': "2000+"},
 }
 
-nand = {
-    'SEASK': 'MLC',
-    'C1': 'SLC',
-    '3C2QC': 'iSLC',
-    'BC1DC': 'MLC',
-    'BW1DC': 'MLC',
-    'ECBQF': '3D TLC',
-    'EWBQF': '3D TLC',
-    'GCCDL': '3D TLC',
-    'BWADC': 'MLC',
-    'EC3QF': '3D TLC',
-    'BC2SC': 'MLC',
-    'SCBSB': 'SLC',
-    'EWAQF': '3D TLC',
-    'BC1QC': 'MLC',
-    'BWBQC': 'MLC',
-    'BCAQC': 'MLC',
-    'BC2DC': 'MLC',
-}
-
-model = {
+model1 = {
     'SATA': {
         'M24': 'M.2 (S42)',
         'M28': 'M.2 (S80)',
@@ -77,14 +57,17 @@ model = {
         'SLM': 'SATA Slim',
         'ST2': '2.5"',
         'SNH': 'ServerDOM',
+        'RPS': 'D150Q',
     },
     'PCIe': {
+        'SBC': 'Server Boot Card',
         'M24': 'M.2 (P42)',
         'M28': 'M.2 (P80)',
         'CFX': 'CFexpress',
     },
     'PATA': {
         'CFC': 'iCF',
+        'CF' : 'iCF',
         'P25': '2.5" PATA SSD',
     },
     'USB': {
@@ -99,12 +82,38 @@ model = {
     }
 }
 
+model2 = {
+    'DEMSR': 'MSR',
+    'DHMSR': 'MSR',
+    'DHM24': 'M24',
+    'DESDC': 'SDC',
+    'DEM24': 'M24',
+    'DECFA': 'CFA',
+    'DC1M': 'CF',
+    'DGS25': 'S25',
+    'DRS25': 'S25',
+    'DHS25': 'S25',
+    'DUM28': 'M28',
+    'DHUH1': 'UH1',
+    'DESBC': 'SBC',
+    'DS2M': 'SDM',
+    'DRPS': 'RPS',
+    'DEM28': 'M28',
+    'DGM28': 'M28',
+    'DS2A': 'SDC',
+
+
+}
+
 
 class Case:
     def __init__(self, excel, col, row):
         self.i = row
         self.n = excel[col["Doc#"]+str(row)].value
-        # self.f = excel[col[""]+str(row)].value
+        self.t = excel[col["Type"]+str(row)].value
+        self.y = excel[col['Submit date']+str(row)].value.split()[0].split('-')[-1]
+        self.st = excel[col["SubTerritory"]+str(row)].value
+        self.fo = ' '.join(excel[col["FAE Owner"]+str(row)].value.split('_')).title()
         self.s = excel[col["Status"]+str(row)].value
         self.cu = excel[col["Customer name"]+str(row)].value.title()
         self.ec = excel[col["End customer name"]+str(row)].value
@@ -116,24 +125,39 @@ class Case:
 class Flash(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
-        self.t = "FLASH"
+        self.bu = "FLASH"
+
         self.pn = excel[col["Innodisk PN"]+str(row)].value
-        # print(self.pn)
-        self.ct = ''.join(self.pn.split('-')[1][3:6])
-        # self.nf = nand[''.join(self.pn.split('-')[1][6::])]
-        self.mn = excel[col["Model name"]+str(row)].value
-        self.it = excel[col["ERP Interface"]+str(row)].value
-        # self.se = series[self.ct][self.nf]
-        self.se = excel[col["ERP Family"]+str(row)].value
+        print(self.pn)
+
+        self.ct = excel[col["FLASH Decode-controller code"]+str(row)].value
+
+        if self.ct == "M81":
+            self.it = 'PCIe'
+        else:
+            self.it = excel[col["ERP Interface"]+str(row)].value
+
+        if excel[col["DRAM Decode-Memory type"] + str(row)].value is None:
+            self.ff = model1[self.it][model2[self.pn.split('-')[0]]]
+        else:
+            self.ff = model1[self.it][excel[col["DRAM Decode-Memory type"] + str(row)].value]
+
+        self.mn = self.ff
+
+        if self.ct == "M81":
+            self.se = 'Server'
+        else:
+            self.se = series[self.ct][excel[col["ERP Flash type"]+str(row)].value]
+
         self.r1 = excel[col["Root cause1"]+str(row)].value
         self.r2 = excel[col["Root cause2"]+str(row)].value
         # self.fa = [' '.join([self.r1, self.r2])]
 
     def spec(self):
         return {
-            'type:': self.t,
+            'type:': self.bu,
             'part numbers': self.pn,
-            'model name': self.mn,
+            'model name': self.ff,
             'interface': self.it,
             'ctrl': self.ct
         }
@@ -142,7 +166,7 @@ class Flash(Case):
 class DRAM(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
-        self.t = "DRAM"
+        self.bu = "DRAM"
         self.pn = excel[col["Innodisk PN"] + str(row)].value
         self.mn = excel[col["DRAM Decode-DIMM Type(3rd)"] + str(row)].value
         self.sp = excel[col["DRAM Decode-IC Data Rate(4th)"] + str(row)].value  # MHz
@@ -152,7 +176,7 @@ class DRAM(Case):
 
     def spec(self):
         return {
-            'type:': self.t,
+            'type:': self.bu,
             'part numbers': self.pn,
             'model name': self.mn,
             'speed': self.sp,
@@ -163,7 +187,7 @@ class DRAM(Case):
 class EP(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
-        self.t = "EP"
+        self.bu = "EP"
         self.pn = excel[col["Innodisk PN"] + str(row)].value
         self.mn = excel[col["Model name"] + str(row)].value
         self.se = excel[col["ERP Family"] + str(row)].value
@@ -172,7 +196,7 @@ class EP(Case):
 
     def spec(self):
         return {
-            'type:': self.t,
+            'type:': self.bu,
             'part numbers': self.pn,
             'model name': self.mn,
             'series': self.se,

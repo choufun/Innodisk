@@ -41,21 +41,22 @@ class Reader:
         for index, row in enumerate(self.e.iter_rows(min_row=2, max_row=len(self.e['A']))):
             if row[0].value == "*":
                 for cell_obj in row:
-                    # debug(cell_obj)
-                    if cell_obj.value == 'FLASH':
-                        case = Flash(self.e, self.c, cell_obj.row)
-                        debug(case)
-                        self.lookahead(case, row)
+                    if self.e['F'+str(cell_obj.row)].value != 'DOA':
+                        # debug(cell_obj)
+                        if cell_obj.value == 'FLASH':
+                            case = Flash(self.e, self.c, cell_obj.row)
+                            debug(case)
+                            self.lookahead(case, row)
 
-                    elif cell_obj.value == 'DRAM':
-                        case = DRAM(self.e, self.c, cell_obj.row)
-                        debug(case)
-                        self.lookahead(case, row)
+                        elif cell_obj.value == 'DRAM':
+                            case = DRAM(self.e, self.c, cell_obj.row)
+                            debug(case)
+                            self.lookahead(case, row)
 
-                    elif cell_obj.value == 'EP':
-                        case = EP(self.e, self.c, cell_obj.row)
-                        debug(case)
-                        self.lookahead(case, row)
+                        elif cell_obj.value == 'EP':
+                            case = EP(self.e, self.c, cell_obj.row)
+                            debug(case)
+                            self.lookahead(case, row)
             else:
                 self.lookahead(case, row)
 
