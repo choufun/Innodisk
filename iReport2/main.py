@@ -4,6 +4,7 @@ from tkinter import filedialog
 import os
 
 from reader import *
+from writer import *
 
 
 class App:
@@ -21,8 +22,10 @@ class App:
         self.filename.set(filename)
 
     def compile(self):
-        reader = Reader(self.filename.get()).scan()
-        pass
+        reader = Reader(self.filename.get())
+        reader.scan()
+        writer = Writer(reader.stack())
+        writer.report()
 
 
 def main():

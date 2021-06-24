@@ -15,31 +15,52 @@ class Reader:
                 debug(cell_obj)
                 self.c[cell_obj.value] = cell_obj.column_letter
 
-        pprint(self.c)
+        # pprint(self.c)
+
+    def lookahead(self, case, row):
+        print("case index: {} {}".format(case.i, self.e['A' + str(case.i)].value))
+        print("curr index: {} {}".format(row[0].row, row[0].value))
+        print("next index: {} {}".format(row[0].row+1, self.e['A'+str(row[0].row+1)].value))
+        print("last index: {} {}".format(len(self.e['A'])-1, self.e['A'+str(len(self.e['A'])-1)].value))
+
+        if case.i == len(self.e['A']) - 1:
+            self.s.append(case)
+            print('...last case added...')
+            print('stack size:', len(self.s), '\n')
+        else:
+            if self.e['A'+str(row[0].row+1)].value == '*':
+                self.s.append(case)
+                print('...case added...')
+                print('stack size:', len(self.s), '\n')
+            else:
+                print('...case updated...')
+                print('stack size:', len(self.s), '\n')
 
     def scan(self):
         case = None
-
         for index, row in enumerate(self.e.iter_rows(min_row=2, max_row=len(self.e['A']))):
             if row[0].value == "*":
                 for cell_obj in row:
+                    # debug(cell_obj)
                     if cell_obj.value == 'FLASH':
                         case = Flash(self.e, self.c, cell_obj.row)
-                        print("index: {} - Flash case created".format(cell_obj.row))
                         debug(case)
+                        self.lookahead(case, row)
 
                     elif cell_obj.value == 'DRAM':
                         case = DRAM(self.e, self.c, cell_obj.row)
-                        print("index: {} - DRAM case created".format(cell_obj.row))
                         debug(case)
+                        self.lookahead(case, row)
 
                     elif cell_obj.value == 'EP':
                         case = EP(self.e, self.c, cell_obj.row)
-                        print("index: {} - EP case created".format(cell_obj.row))
                         debug(case)
-
+                        self.lookahead(case, row)
             else:
-                print("index: {}   - updating case...")
+                self.lookahead(case, row)
+
+    def stack(self):
+        return self.s
 
 
 def debug(obj):
@@ -51,11 +72,7 @@ def debug(obj):
         print("DEBUG::\tcol_idx: {}".format(obj.col_idx))
         print('\n\n')
 
-    elif isinstance(obj, Flash):
-        print("DEBUG::\tnumber: {}".format(obj.n))
-
-    elif isinstance(obj, DRAM):
-        print("DEBUG::\tnumber: {}".format(obj.n))
-
-    elif isinstance(obj, EP):
-        print("DEBUG::\tnumber: {}".format(obj.n))
+    elif isinstance(obj, Flash) or isinstance(obj, DRAM) or isinstance(obj, EP):
+        print("index: {} - {} case created".format(obj.i, obj.t))
+        print("DEBUG::")
+        pprint(obj.spec())
