@@ -12,53 +12,48 @@ class Reader:
 
         for index, row in enumerate(self.e.iter_rows(min_row=1, max_row=1)):
             for cell_obj in row:
-                debug(cell_obj)
                 self.c[cell_obj.value] = cell_obj.column_letter
-
-        # pprint(self.c)
 
     def lookahead(self, case, row):
         print("case index: {} {}".format(case.i, self.e['A' + str(case.i)].value))
         print("curr index: {} {}".format(row[0].row, row[0].value))
-        print("next index: {} {}".format(row[0].row+1, self.e['A'+str(row[0].row+1)].value))
-        print("last index: {} {}".format(len(self.e['A'])-1, self.e['A'+str(len(self.e['A'])-1)].value))
+        print("next index: {} {}".format(row[0].row + 1, self.e['A' + str(row[0].row + 1)].value))
+        print("last index: {} {}".format(len(self.e['A']) - 1, self.e['A' + str(len(self.e['A']))].value))
 
-        if case.i == len(self.e['A']) - 1:
+        if case.i == len(self.e['A']):
             self.s.append(case)
-            print('...last case added...')
+            print('last case added')
+            debug(case)
             print('stack size:', len(self.s), '\n')
         else:
-            if self.e['A'+str(row[0].row+1)].value == '*':
+            if self.e['A' + str(row[0].row + 1)].value == '*':
                 self.s.append(case)
-                print('...case added...')
+                print('case added')
+                debug(case)
                 print('stack size:', len(self.s), '\n')
             else:
+                case.add(self.e, self.c, row[0].row, 'u')
                 print('...case updated...')
                 print('stack size:', len(self.s), '\n')
 
     def scan(self):
         case = None
         for index, row in enumerate(self.e.iter_rows(min_row=2, max_row=len(self.e['A']))):
-            if row[0].value == "*":
-                for cell_obj in row:
-                    if self.e['F'+str(cell_obj.row)].value != 'DOA':
-                        # debug(cell_obj)
-                        if cell_obj.value == 'FLASH':
-                            case = Flash(self.e, self.c, cell_obj.row)
-                            debug(case)
-                            self.lookahead(case, row)
+            if self.e[self.c["Type"] + str(row[0].row)].value != 'DOA':
+                if row[0].value == "*":
+                    if self.e[self.c["BU"]+str(row[0].row)].value == 'FLASH':
+                        case = Flash(self.e, self.c, row[0].row)
+                        self.lookahead(case, row)
 
-                        elif cell_obj.value == 'DRAM':
-                            case = DRAM(self.e, self.c, cell_obj.row)
-                            debug(case)
-                            self.lookahead(case, row)
+                    elif self.e[self.c["BU"]+str(row[0].row)].value == 'DRAM':
+                        case = DRAM(self.e, self.c, row[0].row)
+                        self.lookahead(case, row)
 
-                        elif cell_obj.value == 'EP':
-                            case = EP(self.e, self.c, cell_obj.row)
-                            debug(case)
-                            self.lookahead(case, row)
-            else:
-                self.lookahead(case, row)
+                    elif self.e[self.c["BU"]+str(row[0].row)].value == 'EP':
+                        case = EP(self.e, self.c, row[0].row)
+                        self.lookahead(case, row)
+                else:
+                    self.lookahead(case, row)
 
     def stack(self):
         return self.s
@@ -74,6 +69,6 @@ def debug(obj):
         print('\n\n')
 
     elif isinstance(obj, Flash) or isinstance(obj, DRAM) or isinstance(obj, EP):
-        print("index: {} - {} case created".format(obj.i, obj.t))
-        print("DEBUG::")
-        pprint(obj.spec())
+        print("DEBUG:: {}".format(obj.spec()))
+        for fa in obj.fa:
+            pprint(fa.info(), indent=4)

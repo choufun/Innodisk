@@ -101,9 +101,31 @@ model2 = {
     'DEM28': 'M28',
     'DGM28': 'M28',
     'DS2A': 'SDC',
-
-
 }
+
+
+class Failure:
+    def __init__(self, pn, se, ff, r1, r2):
+        self.pn = pn
+        self.se = se
+        self.mn = ff
+        self.r1 = r1
+        self.r2 = r2
+
+    def check(self, pn, r1, r2):
+        if self.pn == pn and self.r1 == r1 or self.r2 == r2:
+            return False
+        else:
+            return False
+
+    def info(self):
+        return {
+            'pn': self.pn,
+            'se': self.se,
+            'mn': self.mn,
+            'r1': self.r1,
+            'r2': self.r2,
+        }
 
 
 class Case:
@@ -114,52 +136,65 @@ class Case:
         self.y = excel[col['Submit date']+str(row)].value.split()[0].split('-')[-1]
         self.st = excel[col["SubTerritory"]+str(row)].value
         self.fo = ' '.join(excel[col["FAE Owner"]+str(row)].value.split('_')).title()
+        # self.hf = ' '.join(excel[col["Forward FAE Owner"]+str(row)].value.split('_')).title()
         self.s = excel[col["Status"]+str(row)].value
         self.cu = excel[col["Customer name"]+str(row)].value.title()
         self.ec = excel[col["End customer name"]+str(row)].value
         self.cr = excel[col["Customer attr"]+str(row)].value
-        # self.od = excel[col[""]+str(row)].value
-        # self.cd = excel[col[""]+str(row)].value
+        self.od = excel[col["Submit date"]+str(row)].value
+        self.cd = excel[col["FA date"]+str(row)].value
 
 
 class Flash(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
         self.bu = "FLASH"
+        self.fa = None
+        self.add(excel, col, row, 'c')
 
-        self.pn = excel[col["Innodisk PN"]+str(row)].value
-        print(self.pn)
-
-        self.ct = excel[col["FLASH Decode-controller code"]+str(row)].value
-
-        if self.ct == "M81":
-            self.it = 'PCIe'
+    def add(self, excel, col, row, method):
+        pn = excel[col["Innodisk PN"] + str(row)].value
+        ct = excel[col["FLASH Decode-controller code"] + str(row)].value
+        if ct == "M81":
+            it = 'PCIe'
         else:
-            self.it = excel[col["ERP Interface"]+str(row)].value
-
+            it = excel[col["ERP Interface"] + str(row)].value
         if excel[col["DRAM Decode-Memory type"] + str(row)].value is None:
-            self.ff = model1[self.it][model2[self.pn.split('-')[0]]]
+            ff = model1[it][model2[pn.split('-')[0]]]
         else:
-            self.ff = model1[self.it][excel[col["DRAM Decode-Memory type"] + str(row)].value]
-
-        self.mn = self.ff
-
-        if self.ct == "M81":
-            self.se = 'Server'
+            ff = model1[it][excel[col["DRAM Decode-Memory type"] + str(row)].value]
+        mn = ff
+        if ct == "M81":
+            se = 'Server'
         else:
-            self.se = series[self.ct][excel[col["ERP Flash type"]+str(row)].value]
+            se = series[ct][excel[col["ERP Flash type"] + str(row)].value]
 
-        self.r1 = excel[col["Root cause1"]+str(row)].value
-        self.r2 = excel[col["Root cause2"]+str(row)].value
-        # self.fa = [' '.join([self.r1, self.r2])]
+        if excel[col["Root cause1"] + str(row)].value is not None:
+            r1 = excel[col["Root cause1"] + str(row)].value
+        else:
+            r1 = "Undetermined"
+        if excel[col["Root cause2"] + str(row)].value is not None:
+            r2 = excel[col["Root cause2"] + str(row)].value
+        else:
+            r2 = ""
+
+        if method == 'c':
+            self.fa = [Failure(pn, se, mn, r1, r2)]
+
+        elif method == 'u':
+            flag = True
+            for fa in self.fa:
+                if pn == fa.pn and r1 == fa.r1 and r2 == fa.r2:
+                    flag = False
+
+            if flag:
+                self.fa.append(Failure(pn, se, mn, r1, r2))
 
     def spec(self):
         return {
+            'case': self.n,
             'type:': self.bu,
-            'part numbers': self.pn,
-            'model name': self.ff,
-            'interface': self.it,
-            'ctrl': self.ct
+            'issues': len(self.fa),
         }
 
 
@@ -167,20 +202,39 @@ class DRAM(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
         self.bu = "DRAM"
-        self.pn = excel[col["Innodisk PN"] + str(row)].value
-        self.mn = excel[col["DRAM Decode-DIMM Type(3rd)"] + str(row)].value
-        self.sp = excel[col["DRAM Decode-IC Data Rate(4th)"] + str(row)].value  # MHz
-        self.se = excel[col["ERP Family"]+str(row)].value  # DDR3 or DDR4
-        self.r1 = excel[col["Root cause1"] + str(row)].value
-        self.r2 = excel[col["Root cause2"] + str(row)].value
+        self.fa = None
+        self.add(excel, col, row, 'c')
+
+    def add(self, excel, col, row, method):
+        pn = excel[col["Innodisk PN"] + str(row)].value
+        mn = excel[col["DRAM Decode-DIMM Type(3rd)"] + str(row)].value
+        sp = excel[col["DRAM Decode-IC Data Rate(4th)"] + str(row)].value
+        se = excel[col["ERP Family"]+str(row)].value
+        if excel[col["Root cause1"] + str(row)].value is not None:
+            r1 = excel[col["Root cause1"] + str(row)].value
+        else:
+            r1 = "Undetermined"
+        if excel[col["Root cause2"] + str(row)].value is not None:
+            r2 = excel[col["Root cause2"] + str(row)].value
+        else:
+            r2 = ""
+
+        if method == 'c':
+            self.fa = [Failure(pn, se, mn, r1, r2)]
+
+        elif method == 'u':
+            flag = True
+            for fa in self.fa:
+                if pn == fa.pn and r1 == fa.r1 and r2 == fa.r2:
+                    flag = False
+            if flag:
+                self.fa.append(Failure(pn, se, mn, r1, r2))
 
     def spec(self):
         return {
+            'case': self.n,
             'type:': self.bu,
-            'part numbers': self.pn,
-            'model name': self.mn,
-            'speed': self.sp,
-            'series': self.se,
+            'issues': len(self.fa),
         }
 
 
@@ -188,16 +242,36 @@ class EP(Case):
     def __init__(self, excel, col, row):
         super().__init__(excel, col, row)
         self.bu = "EP"
-        self.pn = excel[col["Innodisk PN"] + str(row)].value
-        self.mn = excel[col["Model name"] + str(row)].value
-        self.se = excel[col["ERP Family"] + str(row)].value
-        self.r1 = excel[col["Root cause1"] + str(row)].value
-        self.r2 = excel[col["Root cause2"] + str(row)].value
+        self.fa = None
+        self.add(excel, col, row, 'c')
+
+    def add(self, excel, col, row, method):
+        pn = excel[col["Innodisk PN"] + str(row)].value
+        mn = excel[col["Model name"] + str(row)].value
+        se = excel[col["ERP Family"] + str(row)].value
+        if excel[col["Root cause1"] + str(row)].value is not None:
+            r1 = excel[col["Root cause1"] + str(row)].value
+        else:
+            r1 = "Undetermined"
+        if excel[col["Root cause2"] + str(row)].value is not None:
+            r2 = excel[col["Root cause2"] + str(row)].value
+        else:
+            r2 = ""
+
+        if method == 'c':
+            self.fa = [Failure(pn, se, mn, r1, r2)]
+
+        elif method == 'u':
+            flag = True
+            for fa in self.fa:
+                if pn == fa.pn and r1 == fa.r1 and r2 == fa.r2:
+                    flag = False
+            if flag:
+                self.fa.append(Failure(pn, se, mn, r1, r2))
 
     def spec(self):
         return {
+            'case': self.n,
             'type:': self.bu,
-            'part numbers': self.pn,
-            'model name': self.mn,
-            'series': self.se,
+            'issues': len(self.fa),
         }
