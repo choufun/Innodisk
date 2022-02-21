@@ -17,10 +17,10 @@ class Reader:
     def lookahead(self, case, row):
         print("case index: {} {}".format(case.i, self.e['A' + str(case.i)].value))
         print("curr index: {} {}".format(row[0].row, row[0].value))
-        print("next index: {} {}".format(row[0].row + 1, self.e['A' + str(row[0].row + 1)].value))
-        print("last index: {} {}".format(len(self.e['A']) - 1, self.e['A' + str(len(self.e['A']))].value))
+        print("next index: {} {}".format(row[0].row + 1, self.e['B' + str(row[0].row + 1)].value))
+        print("last index: {} {}".format(len(self.e['B'])-1, self.e['B' + str(len(self.e['B']))].value))
 
-        if case.i == len(self.e['A']):
+        if case.i == len(self.e['B'])-1:
             self.s.append(case)
             print('last case added')
             debug(case)
@@ -38,22 +38,16 @@ class Reader:
 
     def scan(self):
         case = None
-        for index, row in enumerate(self.e.iter_rows(min_row=2, max_row=len(self.e['A']))):
+        for index, row in enumerate(self.e.iter_rows(min_row=2, max_row=len(self.e['B']))):
             if self.e[self.c["Type"] + str(row[0].row)].value != 'DOA':
                 if row[0].value == "*":
                     if self.e[self.c["BU"]+str(row[0].row)].value == 'FLASH':
                         case = Flash(self.e, self.c, row[0].row)
-                        self.lookahead(case, row)
-
                     elif self.e[self.c["BU"]+str(row[0].row)].value == 'DRAM':
                         case = DRAM(self.e, self.c, row[0].row)
-                        self.lookahead(case, row)
-
                     elif self.e[self.c["BU"]+str(row[0].row)].value == 'EP':
                         case = EP(self.e, self.c, row[0].row)
-                        self.lookahead(case, row)
-                else:
-                    self.lookahead(case, row)
+                self.lookahead(case, row)
 
     def stack(self):
         return self.s
